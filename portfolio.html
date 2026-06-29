@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Arya Deshmukh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#06060e;
+  --bg1:#0c0c1a;
+  --bg2:#111124;
+  --v:#6d28d9;
+  --vl:#a78bfa;
+  --vd:#2d1f5e;
+  --vg:rgba(109,40,217,0.12);
+  --t:#ede9fe;
+  --tm:#7c75a8;
+  --td:#2e2c4a;
+  --br:rgba(109,40,217,0.18);
+  --brs:rgba(167,139,250,0.06);
+  --mono:'JetBrains Mono',monospace;
+  --display:'Space Grotesk',sans-serif;
+}
+
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--t);font-family:var(--display);font-size:16px;line-height:1.6;overflow-x:hidden}
+
+canvas#bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.25}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 3rem;
+  background:rgba(6,6,14,0.6);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--brs);
+}
+
+.logo{
+  font-family:var(--mono);font-size:0.8rem;
+  color:var(--vl);letter-spacing:0.08em;
+}
+
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{
+  font-family:var(--mono);font-size:0.72rem;
+  color:var(--td);text-decoration:none;
+  letter-spacing:0.08em;text-transform:uppercase;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--vl)}
+
+section{position:relative;z-index:1}
+
+/* HERO */
+#hero{
+  min-height:100vh;display:flex;align-items:flex-end;
+  padding:0 3rem 6rem;max-width:1400px;margin:0 auto;
+}
+
+.hero-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:4rem;align-items:end;width:100%;
+}
+
+.hero-left{}
+
+.hero-index{
+  font-family:var(--mono);font-size:0.68rem;
+  color:var(--td);letter-spacing:0.15em;
+  text-transform:uppercase;margin-bottom:2rem;
+  display:flex;align-items:center;gap:1rem;
+}
+.hero-index::before{
+  content:'';display:block;width:3rem;height:1px;background:var(--td);
+}
+
+h1{
+  font-size:clamp(3.5rem,6vw,6rem);
+  font-weight:700;line-height:0.95;
+  letter-spacing:-0.04em;
+  margin-bottom:2rem;
+}
+
+h1 em{
+  font-style:normal;
+  -webkit-text-stroke:1px var(--vl);
+  color:transparent;
+  display:block;
+}
+
+.hero-desc{
+  font-family:var(--mono);font-size:0.8rem;
+  color:var(--tm);line-height:1.8;
+  max-width:400px;
+  border-left:2px solid var(--v);
+  padding-left:1.25rem;
+}
+
+.hero-right{
+  display:flex;flex-direction:column;
+  gap:0;padding-bottom:0.5rem;
+}
+
+.hero-stat-row{
+  display:flex;align-items:baseline;
+  justify-content:space-between;
+  padding:1.25rem 0;
+  border-bottom:1px solid var(--brs);
+}
+.hero-stat-row:first-child{border-top:1px solid var(--brs)}
+
+.stat-n{
+  font-size:2.5rem;font-weight:700;
+  letter-spacing:-0.04em;color:var(--t);
+}
+.stat-n span{color:var(--vl)}
+.stat-l{
+  font-family:var(--mono);font-size:0.68rem;
+  color:var(--td);letter-spacing:0.1em;
+  text-transform:uppercase;text-align:right;
+}
+
+/* SECTION CHROME */
+.wrap{max-width:1400px;margin:0 auto;padding:7rem 3rem}
+
+.s-label{
+  font-family:var(--mono);font-size:0.65rem;
+  color:var(--vl);letter-spacing:0.2em;
+  text-transform:uppercase;
+  display:flex;align-items:center;gap:1rem;
+  margin-bottom:1rem;
+}
+.s-label::before{content:'//';color:var(--td)}
+
+h2{
+  font-size:clamp(2rem,4vw,3.5rem);
+  font-weight:700;letter-spacing:-0.035em;
+  color:var(--t);margin-bottom:4rem;
+}
+
+/* PROJECTS — feature layout */
+.project-feat{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border:1px solid var(--br);
+  margin-bottom:1px;
+  transition:border-color 0.25s;
+  text-decoration:none;
+  color:inherit;
+}
+.project-feat:hover{border-color:var(--vl)}
+.project-feat:hover .proj-arrow{letter-spacing:0.15em;color:var(--vl)}
+
+.proj-left{
+  padding:3.5rem;
+  border-right:1px solid var(--br);
+  display:flex;flex-direction:column;
+  gap:1.5rem;
+}
+
+.proj-num{
+  font-family:var(--mono);font-size:0.65rem;
+  color:var(--td);letter-spacing:0.2em;
+}
+
+.proj-name{
+  font-size:clamp(1.8rem,3vw,2.8rem);
+  font-weight:700;letter-spacing:-0.035em;
+  line-height:1;color:var(--t);
+}
+
+.proj-oneliner{
+  font-family:var(--mono);font-size:0.8rem;
+  color:var(--tm);line-height:1.7;
+  max-width:340px;
+}
+
+.proj-arrow{
+  font-family:var(--mono);font-size:0.72rem;
+  color:var(--td);letter-spacing:0.08em;
+  text-transform:uppercase;
+  transition:all 0.25s;
+  margin-top:auto;
+}
+
+.proj-right{
+  padding:3.5rem;
+  display:flex;flex-direction:column;
+  gap:2.5rem;
+  justify-content:space-between;
+}
+
+.proj-detail-label{
+  font-family:var(--mono);font-size:0.62rem;
+  color:var(--td);letter-spacing:0.15em;
+  text-transform:uppercase;
+  margin-bottom:0.75rem;
+}
+
+.proj-detail-val{
+  font-size:0.9rem;color:var(--tm);line-height:1.65;
+}
+
+.proj-stack{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.75rem}
+.stack-t{
+  font-family:var(--mono);font-size:0.68rem;
+  padding:0.28rem 0.65rem;
+  border:1px solid var(--br);
+  color:var(--vl);background:var(--vg);
+  letter-spacing:0.04em;
+}
+
+/* PROJECT small grid below */
+.projects-sub{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border:1px solid var(--br);
+  border-top:none;
+}
+
+.proj-sm{
+  padding:2.5rem;
+  border-right:1px solid var(--br);
+  display:flex;flex-direction:column;
+  gap:1rem;transition:background 0.2s;
+  text-decoration:none;color:inherit;
+}
+.proj-sm:last-child{border-right:none}
+.proj-sm:hover{background:var(--bg1)}
+
+.proj-sm-name{
+  font-size:1.3rem;font-weight:600;
+  letter-spacing:-0.025em;color:var(--t);
+}
+.proj-sm-desc{
+  font-family:var(--mono);font-size:0.77rem;
+  color:var(--tm);line-height:1.65;flex:1;
+}
+
+/* WORK */
+#work{background:var(--bg1);border-top:1px solid var(--brs);border-bottom:1px solid var(--brs)}
+
+.work-grid{display:flex;flex-direction:column;gap:0}
+
+.work-item{
+  display:grid;grid-template-columns:280px 1fr;
+  border-bottom:1px solid var(--brs);
+  padding:2.5rem 0;
+}
+.work-item:last-child{border-bottom:none}
+
+.work-left{}
+.work-co{
+  font-weight:600;font-size:1rem;
+  color:var(--t);margin-bottom:0.3rem;
+}
+.work-period{
+  font-family:var(--mono);font-size:0.68rem;
+  color:var(--td);letter-spacing:0.06em;
+}
+
+.work-right{}
+.work-role{
+  font-family:var(--mono);font-size:0.72rem;
+  color:var(--vl);letter-spacing:0.1em;
+  text-transform:uppercase;margin-bottom:1rem;
+}
+
+.work-bullets{
+  display:flex;flex-direction:column;gap:0.6rem;
+  list-style:none;
+}
+.work-bullets li{
+  font-size:0.9rem;color:var(--tm);
+  line-height:1.6;
+  padding-left:1.25rem;position:relative;
+}
+.work-bullets li::before{
+  content:'→';position:absolute;left:0;
+  color:var(--v);font-size:0.8rem;line-height:1.8;
+}
+
+.work-built{
+  display:flex;flex-wrap:wrap;gap:0.5rem;
+  margin-top:1.25rem;
+}
+.built-tag{
+  font-family:var(--mono);font-size:0.65rem;
+  padding:0.25rem 0.6rem;
+  background:var(--bg2);border:1px solid var(--brs);
+  color:var(--td);letter-spacing:0.04em;
+}
+
+/* STACK */
+#stack{}
+
+.stack-table{
+  width:100%;border-collapse:collapse;
+  border:1px solid var(--br);
+}
+.stack-table tr{border-bottom:1px solid var(--brs)}
+.stack-table tr:last-child{border-bottom:none}
+.stack-table tr:hover td{background:var(--bg1)}
+.stack-table td{
+  padding:1.5rem 2rem;
+  vertical-align:top;
+  transition:background 0.15s;
+}
+.stack-table td:first-child{
+  width:220px;
+  font-family:var(--mono);font-size:0.68rem;
+  color:var(--vl);letter-spacing:0.12em;
+  text-transform:uppercase;
+  border-right:1px solid var(--brs);
+}
+.stack-pills{display:flex;flex-wrap:wrap;gap:0.5rem}
+.sp{
+  font-family:var(--mono);font-size:0.77rem;
+  padding:0.35rem 0.75rem;
+  background:var(--bg2);border:1px solid var(--brs);
+  color:var(--tm);
+  transition:all 0.15s;cursor:default;
+}
+.sp:hover{border-color:var(--br);color:var(--vl)}
+
+/* FOOTER */
+footer{
+  position:relative;z-index:1;
+  border-top:1px solid var(--brs);
+  padding:2.5rem 3rem;
+  max-width:1400px;margin:0 auto;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.footer-links{display:flex;gap:2rem}
+.footer-links a{
+  font-family:var(--mono);font-size:0.72rem;
+  color:var(--td);text-decoration:none;
+  letter-spacing:0.06em;
+  transition:color 0.2s;
+}
+.footer-links a:hover{color:var(--vl)}
+.footer-sig{
+  font-family:var(--mono);font-size:0.68rem;
+  color:var(--td);letter-spacing:0.06em;
+}
+
+/* CURSOR LINE */
+.cursor{
+  display:inline-block;width:2px;height:1em;
+  background:var(--vl);vertical-align:middle;
+  animation:blink 1s step-end infinite;
+  margin-left:2px;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--vd)}
+
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .wrap,.hero-grid{padding-left:1.5rem;padding-right:1.5rem}
+  #hero{padding:0 1.5rem 4rem}
+  .hero-grid,.project-feat,.projects-sub,.work-item{grid-template-columns:1fr}
+  .proj-left,.proj-right,.proj-sm{padding:2rem 1.5rem}
+  .proj-left{border-right:none;border-bottom:1px solid var(--br)}
+  .projects-sub{grid-template-columns:1fr}
+  .proj-sm{border-right:none;border-bottom:1px solid var(--br)}
+  .stack-table td:first-child{width:auto;display:block;border-right:none;padding-bottom:0}
+  .stack-table td:last-child{padding-top:0.75rem}
+  footer{flex-direction:column;gap:1rem;text-align:center}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<nav>
+  <span class="logo">arya.deshmukh<span class="cursor"></span></span>
+  <ul class="nav-links">
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#work">work</a></li>
+    <li><a href="#stack">stack</a></li>
+    <li><a href="mailto:ardeshmukh1945@gmail.com">contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-grid">
+    <div class="hero-left">
+      <div class="hero-index">Building at the intersection of data and AI</div>
+      <h1>
+        Arya
+        <em>Deshmukh.</em>
+      </h1>
+      <p class="hero-desc">
+        I build data-driven tools and AI-powered products.<br />
+        Python · SQL · React · GenAI · BI systems.<br />
+        SRM IST Chennai — Big Data Analytics.
+      </p>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stat-row">
+        <div class="stat-n">9.23<span>/10</span></div>
+        <div class="stat-l">CGPA</div>
+      </div>
+      <div class="hero-stat-row">
+        <div class="stat-n">3</div>
+        <div class="stat-l">shipped products</div>
+      </div>
+      <div class="hero-stat-row">
+        <div class="stat-n">4</div>
+        <div class="stat-l">internships</div>
+      </div>
+      <div class="hero-stat-row">
+        <div class="stat-n">100<span>+</span></div>
+        <div class="stat-l">club members led</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="s-label">projects</div>
+    <h2>Things I've built</h2>
+
+    <a class="project-feat" href="https://aryadeshmukh19.github.io/Craftcv" target="_blank" rel="noopener">
+      <div class="proj-left">
+        <div class="proj-num">001</div>
+        <div class="proj-name">CraftCV</div>
+        <div class="proj-oneliner">
+          AI resume builder that pulls live GitHub data and generates ATS-optimised resumes tailored to job descriptions — with a full scoring engine.
+        </div>
+        <div class="proj-arrow">aryadeshmukh19.github.io/Craftcv ↗</div>
+      </div>
+      <div class="proj-right">
+        <div>
+          <div class="proj-detail-label">What it does</div>
+          <div class="proj-detail-val">
+            Imports live repo data from the GitHub REST API, feeds it to the Claude API with a job description, and outputs an ATS-optimised resume. Includes a scoring engine that rates keyword match, formatting, readability, and relevance. Persists via localStorage and GitHub Gist.
+          </div>
+        </div>
+        <div>
+          <div class="proj-detail-label">Stack</div>
+          <div class="proj-stack">
+            <span class="stack-t">React</span>
+            <span class="stack-t">Anthropic Claude API</span>
+            <span class="stack-t">GitHub REST API</span>
+            <span class="stack-t">GitHub Pages</span>
+            <span class="stack-t">localStorage</span>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <div class="projects-sub">
+      <div class="proj-sm">
+        <div class="proj-num">002</div>
+        <div class="proj-sm-name">SalesIQ</div>
+        <div class="proj-sm-desc">
+          Multi-dimensional BI dashboard. Tracks Gross Sales, Units Sold, and Profit Margins across regional, product, and rep-level views. Real-time drill-down across 4 reporting dimensions with role-based access control.
+        </div>
+        <div class="proj-stack">
+          <span class="stack-t">Next.js</span>
+          <span class="stack-t">TypeScript</span>
+          <span class="stack-t">Firebase</span>
+          <span class="stack-t">Recharts</span>
+          <span class="stack-t">Firestore</span>
+        </div>
+      </div>
+
+      <div class="proj-sm">
+        <div class="proj-num">003</div>
+        <div class="proj-sm-name">Finlo</div>
+        <div class="proj-sm-desc">
+          Personal finance dashboard. Category analysis, savings goals, budget variance alerts, and recurring expense automation — built offline-first with zero backend. All data lives in the browser.
+        </div>
+        <div class="proj-stack">
+          <span class="stack-t">React</span>
+          <span class="stack-t">Vite</span>
+          <span class="stack-t">JavaScript</span>
+          <span class="stack-t">localStorage</span>
+        </div>
+      </div>
+
+      <div class="proj-sm">
+        <div class="proj-num">004</div>
+        <div class="proj-sm-name">Codezilla ML</div>
+        <div class="proj-sm-desc">
+          Led SRM IST's machine learning and open source club as Co-Head for over a year. Built curriculum, ran hands-on Python and ML workshops, grew active membership to 100+.
+        </div>
+        <div class="proj-stack">
+          <span class="stack-t">Python</span>
+          <span class="stack-t">ML fundamentals</span>
+          <span class="stack-t">Open Source</span>
+          <span class="stack-t">Mozilla</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="s-label">work</div>
+    <h2>Where I've built</h2>
+
+    <div class="work-grid">
+
+      <div class="work-item">
+        <div class="work-left">
+          <div class="work-co">Clear</div>
+          <div class="work-period">Jan 2026 – Jun 2026 · Bangalore</div>
+        </div>
+        <div class="work-right">
+          <div class="work-role">Corporate Partnerships Intern</div>
+          <ul class="work-bullets">
+            <li>Engineered partnership performance trackers using SQL and Excel to surface trends across the pipeline</li>
+            <li>Translated raw partnership metrics into stakeholder-facing data reports for cross-functional teams</li>
+            <li>Managed end-to-end pipeline working across sales, product, and marketing</li>
+          </ul>
+          <div class="work-built">
+            <span class="built-tag">SQL</span>
+            <span class="built-tag">Excel</span>
+            <span class="built-tag">Data reporting</span>
+            <span class="built-tag">CRM analysis</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-left">
+          <div class="work-co">TechCurators</div>
+          <div class="work-period">Jan – May 2024 · Remote</div>
+        </div>
+        <div class="work-right">
+          <div class="work-role">Business Development Intern</div>
+          <ul class="work-bullets">
+            <li>Built CRM data pipelines to track lead generation metrics, conversion rates, and funnel performance</li>
+            <li>Generated weekly dashboards translating raw CRM data into actionable insights for stakeholders</li>
+            <li>Ran competitor analysis and market research to identify new revenue segments</li>
+          </ul>
+          <div class="work-built">
+            <span class="built-tag">CRM pipelines</span>
+            <span class="built-tag">Python</span>
+            <span class="built-tag">Dashboards</span>
+            <span class="built-tag">Market research</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-left">
+          <div class="work-co">FuzeMee</div>
+          <div class="work-period">Sep – Nov 2023 · Remote</div>
+        </div>
+        <div class="work-right">
+          <div class="work-role">Marketing Intern</div>
+          <ul class="work-bullets">
+            <li>Built KPI dashboards tracking CTR, engagement, and conversion across digital campaigns</li>
+            <li>Surfaced high-ROI content strategies from campaign performance data</li>
+          </ul>
+          <div class="work-built">
+            <span class="built-tag">KPI dashboards</span>
+            <span class="built-tag">Campaign analytics</span>
+            <span class="built-tag">Data storytelling</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-left">
+          <div class="work-co">Smile Over Miles</div>
+          <div class="work-period">Apr – Jul 2023 · Pune</div>
+        </div>
+        <div class="work-right">
+          <div class="work-role">Digital Marketing Intern</div>
+          <ul class="work-bullets">
+            <li>Analysed weekly campaign data to optimise content strategy, contributing to measurable audience growth</li>
+            <li>Produced analytics summaries for team leads to support data-driven decisions</li>
+          </ul>
+          <div class="work-built">
+            <span class="built-tag">Analytics</span>
+            <span class="built-tag">Content strategy</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="wrap">
+    <div class="s-label">stack</div>
+    <h2>What I work with</h2>
+
+    <table class="stack-table">
+      <tr>
+        <td>Languages</td>
+        <td><div class="stack-pills">
+          <span class="sp">Python</span><span class="sp">SQL</span><span class="sp">TypeScript</span><span class="sp">JavaScript</span><span class="sp">HTML / CSS</span>
+        </div></td>
+      </tr>
+      <tr>
+        <td>Analytics</td>
+        <td><div class="stack-pills">
+          <span class="sp">Pandas</span><span class="sp">NumPy</span><span class="sp">ETL pipelines</span><span class="sp">Statistical analysis</span><span class="sp">Jupyter</span>
+        </div></td>
+      </tr>
+      <tr>
+        <td>BI and Viz</td>
+        <td><div class="stack-pills">
+          <span class="sp">Power BI</span><span class="sp">Tableau</span><span class="sp">Recharts</span><span class="sp">Excel (Advanced)</span><span class="sp">Google Sheets</span>
+        </div></td>
+      </tr>
+      <tr>
+        <td>Engineering</td>
+        <td><div class="stack-pills">
+          <span class="sp">React</span><span class="sp">Next.js</span><span class="sp">FastAPI</span><span class="sp">Flask</span><span class="sp">REST APIs</span>
+        </div></td>
+      </tr>
+      <tr>
+        <td>Databases</td>
+        <td><div class="stack-pills">
+          <span class="sp">Firebase</span><span class="sp">Cloud Firestore</span><span class="sp">MySQL</span><span class="sp">PostgreSQL</span>
+        </div></td>
+      </tr>
+      <tr>
+        <td>AI and GenAI</td>
+        <td><div class="stack-pills">
+          <span class="sp">Anthropic Claude API</span><span class="sp">Prompt engineering</span><span class="sp">Deep learning</span><span class="sp">Google AI (Certified)</span>
+        </div></td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-links">
+    <a href="https://github.com/Aryadeshmukh19" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://linkedin.com/in/arya-deshmukh-658594239" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="mailto:ardeshmukh1945@gmail.com">ardeshmukh1945@gmail.com</a>
+  </div>
+  <span class="footer-sig">Mumbai, India · 2025</span>
+</footer>
+
+<script>
+(function(){
+  const c=document.getElementById('bg');
+  const x=c.getContext('2d');
+  let W,H,pts;
+
+  function resize(){
+    W=c.width=window.innerWidth;
+    H=c.height=window.innerHeight;
+  }
+
+  function init(){
+    pts=[];
+    const n=Math.floor((W*H)/18000);
+    for(let i=0;i<n;i++){
+      pts.push({
+        x:Math.random()*W,y:Math.random()*H,
+        vx:(Math.random()-0.5)*0.35,
+        vy:(Math.random()-0.5)*0.35,
+        r:Math.random()*1.5+0.5
+      });
+    }
+  }
+
+  function frame(){
+    x.clearRect(0,0,W,H);
+    const D=140;
+    for(let i=0;i<pts.length;i++){
+      const a=pts[i];
+      a.x+=a.vx;a.y+=a.vy;
+      if(a.x<0||a.x>W)a.vx*=-1;
+      if(a.y<0||a.y>H)a.vy*=-1;
+      x.beginPath();
+      x.arc(a.x,a.y,a.r,0,Math.PI*2);
+      x.fillStyle='rgba(109,40,217,0.7)';
+      x.fill();
+      for(let j=i+1;j<pts.length;j++){
+        const b=pts[j];
+        const dx=a.x-b.x,dy=a.y-b.y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<D){
+          x.beginPath();
+          x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);
+          x.strokeStyle=`rgba(109,40,217,${(1-d/D)*0.2})`;
+          x.lineWidth=0.5;x.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  resize();init();frame();
+  window.addEventListener('resize',()=>{resize();init();});
+})();
+</script>
+</body>
+</html>
